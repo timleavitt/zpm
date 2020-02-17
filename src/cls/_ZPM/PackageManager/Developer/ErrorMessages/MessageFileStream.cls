@@ -1,6 +1,13 @@
 Class %ZPM.PackageManager.Developer.ErrorMessages.MessageFileStream Extends %ZPM.PackageManager.Developer.Document.AbstractStream
 {
 
+/// Don't lower-case these.
+Method NameSet(val As %RawString) As %Status
+{
+	Set i%Name = val
+	Return $$$OK
+}
+
 ClassMethod Convert(pFilePath As %String, pSave As %Boolean = 1, Output pObject As %ZPM.PackageManager.Developer.ErrorMessages.MessageFileStream) As %Status
 {
 	Set tSC = $$$OK
