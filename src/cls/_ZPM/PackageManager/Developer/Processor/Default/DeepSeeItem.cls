@@ -3,7 +3,7 @@ Class %ZPM.PackageManager.Developer.Processor.Default.DeepSeeItem Extends %ZPM.P
 
 Parameter EXTENSION = ".DFI";
 
-Parameter ATTRIBUTES As STRING = "Directory,Keywords";
+Parameter ATTRIBUTES As STRING = "Directory,Keywords,FilenameTranslateIdentifier,FilenameTranslateAssociator";
 
 /// Export format
 Property Format As %String [ InitialExpression = "UDL" ];
