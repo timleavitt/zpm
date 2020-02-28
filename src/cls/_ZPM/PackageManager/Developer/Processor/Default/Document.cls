@@ -76,8 +76,6 @@ Method OnPhase(pPhase As %String, ByRef pParams, Output pResourceHandled As %Boo
 						Set ..Format = "UDL"
 					}
 
-					Set tResourceParentPath = ##class(%File).ParentDirectoryName(tResourcePath)
-
 					$$$ThrowOnError(..OnLoad(tResourcePath,tVerbose,.tHandled))
 					If 'tHandled {
 						If (..Format = "UDL") {
@@ -88,7 +86,7 @@ Method OnPhase(pPhase As %String, ByRef pParams, Output pResourceHandled As %Boo
 							If (tDocName [ "*") {
 								set tWildcards = tDocName
 								if $$$isUNIX set tWildcards = $$$ucase(tWildcards)_";"_$$$lcase(tWildcards)
-								do ##class(%ZPM.PackageManager.Developer.File).FindFiles(tResourceParentPath, tWildcards, .tList)
+								do ##class(%ZPM.PackageManager.Developer.File).FindFiles(tResourceDirectory, tWildcards, .tList)
 							} Else {
 								set tList($i(tList)) = $LISTBUILD(tDocName, tResourcePath) 
 							}
@@ -96,7 +94,7 @@ Method OnPhase(pPhase As %String, ByRef pParams, Output pResourceHandled As %Boo
 							For i=1:1:tList {
 								set $LISTBUILD(tDocName, tResourcePath) = tList(i)
 								If ($$$ucase($Piece(tDocName, ".", *)) = "DFI") {
-									Set tDocName = $Translate($Piece(tResourcePath, tResourceParentPath, 2), "-\", "_/")
+									Set tDocName = $Translate($Piece(tResourcePath, tResourceDirectory, 2), "-\", "_/")
 									If (tDocName [ "/") {
 										Set tDocName = $Piece(tDocName, "/", 1, *-1) _ "-" _ $Piece(tDocName, "/", *)
 									}
